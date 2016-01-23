@@ -3,6 +3,7 @@
  
 import tweepy, json
 from twython import Twython
+from updateTweets import get_all_tweets
 
 print 'starting'
 
@@ -37,14 +38,15 @@ twython = Twython(app_key=CONSUMER_KEY,
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # data analysis
-print 'starts analysis'
+def analyze():
+    print 'starting analysis'
 
-jaden_id = secrets["jaden"]["twitter_id"]
-jaden_data = twython.lookup_user(user_id = jaden_id)
+    jaden_id = secrets["jaden"]["twitter_id"]
+    jaden_data = twython.lookup_user(user_id = jaden_id)
 
-print 'obtained ' + jaden_data[0]["name"] + '\'s data'
+    print 'obtained ' + jaden_data[0]["name"] + '\'s data'
 
-print '\n\n~~~~\n' + json.dumps(jaden_data, indent=4, sort_keys=True) + '\n~~~~\n\n'
+    print '\n\n~~~~\n' + json.dumps(jaden_data, indent=4, sort_keys=True) + '\n~~~~\n\n'
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,5 +55,7 @@ def updateStatus(newStatus):
     print 'updating status'
     api.update_status(newStatus)
     return;
+
+get_all_tweets()
 
 print 'exiting'

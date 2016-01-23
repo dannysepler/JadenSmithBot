@@ -1,8 +1,10 @@
-import json
+import json, csv, random
 from twython import Twython
 
 secrets_file = open('secrets.json', 'r')
 secrets = json.load(secrets_file)
+
+jadentweets_file = open('officialjaden_tweets.csv', 'r')
 
 CONSUMER_KEY = secrets["twitter"]["consumer_key"]
 CONSUMER_SECRET = secrets["twitter"]["consumer_secret"]
@@ -32,3 +34,20 @@ def analyze():
     # print 'obtained ' + jaden_data[0]["name"] + '\'s data'
     # print '\n\n~~~~\n' + json.dumps(jaden_data, indent=4, sort_keys=True) + '\n~~~~\n\n'
 
+def getRandomTweet():
+    # got most of this code from http://stackoverflow.com/questions/10819911/read-random-lines-from-huge-csv-file-in-python
+
+    filesize = sum(1 for row in jadentweets_file)
+    offset = random.randrange(filesize)
+
+    jadentweets_file.seek(offset)                  #go to random position
+    jadentweets_file.readline()                    # discard - bound to be partial line
+    random_line = jadentweets_file.readline()      # bingo!
+
+    # extra to handle last/first line edge cases
+    if len(random_line) == 0:       # we have hit the end
+        jadentweets_file.seek(0)
+        random_line = jadentweets_file.readline()  # so we'll grab the first line instead
+
+    tweet = random_line.split(',')[2]
+    return tweet

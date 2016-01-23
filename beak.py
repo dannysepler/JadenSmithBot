@@ -1,9 +1,7 @@
-import tweepy, json
+import tweepy, json, csv
 
 secrets_file = open('secrets.json', 'r')
 secrets = json.load(secrets_file)
-
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # load in the twitter data

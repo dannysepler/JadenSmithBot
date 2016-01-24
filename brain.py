@@ -34,6 +34,18 @@ def analyze():
     # print 'obtained ' + jaden_data[0]["name"] + '\'s data'
     # print '\n\n~~~~\n' + json.dumps(jaden_data, indent=4, sort_keys=True) + '\n~~~~\n\n'
 
+def censor(tweet):
+    # this goes through all the bad words in "censor.json"
+    # and then replaces them with 'better' words
+
+    badwords_json = json.load(open('censor.json', 'r'))
+
+    for word in badwords_json:
+        for bad, better in word.iteritems():
+            tweet = tweet.replace(bad, better)
+
+    return tweet
+
 def getRandomTweet():
     # got most of this code from http://stackoverflow.com/questions/10819911/read-random-lines-from-huge-csv-file-in-python
 
@@ -50,4 +62,7 @@ def getRandomTweet():
         random_line = jadentweets_file.readline()  # so we'll grab the first line instead
 
     tweet = random_line.split(',')[2]
+
+    tweet = censor(tweet)
+
     return tweet

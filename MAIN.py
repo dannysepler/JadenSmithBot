@@ -6,9 +6,9 @@ from twython import Twython
 
 
 # my interface
-from updateTweets import get_all_tweets
-    # use this to update our list of jaden's tweets
-    # get_all_tweets()
+from tweetlist import get_all_tweets, clean, makeMarkovChain
+    # use get_all_tweets() to update our list of jaden's tweets
+    # use clean() to make our list even better
 
 from brain import analyze, getRandomTweet
     # use this to grab info about Jaden
@@ -18,8 +18,16 @@ from beak import tweet
     # use this to make a new tweet from our lovely bot
     # tweet('hello, world')
 
-print 'starting\n'
-tweet('dear fans, i\'m testing this bot by posting random jaden tweets. the smarts are coming soon! stay beautiful.')
+print 'cleaning\n'
+
+makeMarkovChain()
+
+print 'done\n'
+
+
+
+
+'''tweet('dear fans, i\'m testing this bot by posting random jaden tweets. the smarts are coming soon! stay beautiful.')
 
 for x in range(0, 10):
     print 'tweet #' + str(x)
@@ -31,5 +39,4 @@ for x in range(0, 10):
 print '\ndone with loop'
 
 tweet('thanks, fans')
-
-print '\ndone with program'
+'''

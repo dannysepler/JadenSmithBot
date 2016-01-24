@@ -21,5 +21,10 @@ api = tweepy.API(auth)
 # make status
 def tweet(newStatus):
     print 'updating status'
+
+    if len(newStatus) > 135:
+        print 'status is too long'
+        return;
+
     api.update_status(newStatus)
     return;

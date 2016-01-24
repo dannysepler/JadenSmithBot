@@ -21,6 +21,35 @@ twython = Twython(app_key=CONSUMER_KEY,
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # data analysis
+
+def thinkOfASentence():
+    markov_file = open('markov.json', 'r')
+    markov = json.load(markov_file)
+
+    print 'Choosing First Word'
+
+    sentence = ''
+    addWord = random.choice(markov['data'].keys())
+    sentence += addWord
+    previousWord = addWord
+
+    for x in range(0,10):
+        try:
+            addWord = random.choice(markov['data'][previousWord].keys())
+            sentence += ' ' + addWord
+            previousWord = addWord
+        except KeyError:
+            print 'Key Error'
+
+            # try again
+            return thinkOfASentence()
+
+    print 'Setence Generated Fully'
+    return sentence
+
+
+
+
 def analyze():
     print 'starting analysis'
 

@@ -23,6 +23,6 @@ print 'starting\n'
 for x in range(0,10):
     sentence = thinkOfASentence() # make wisdom
     tweet(sentence) # tweet it
-    # time.sleep(600) # sleep for ten minutes
+    time.sleep(600) # sleep for ten minutes
 
 print 'loop ended. shouldn\'t happen.\n'

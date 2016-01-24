@@ -82,6 +82,15 @@ def isLineBreak(row):
     count = row.count(",")
     return count < 2
 
+def sanitize(word):
+    word = word.lower()
+
+    word = word.replace("\t", "")
+    word = word.replace("\r", "")
+    word = word.replace("\n", "")
+    word = word.replace("\"", "")
+
+    return word
 
 def makeMarkovChain():
 
@@ -89,32 +98,56 @@ def makeMarkovChain():
 
     jadentweets_file = open('officialjaden_tweets.csv', 'r')
     # markovJSON = json.loads(request.POST.get('mydata', '{}'))
-    markovData = {}
+
+    data = 'data'
+
+    markovData = {data: {}}
+    rowCounter = 0
 
     for row in jadentweets_file:
+        print 'loading row ' + str(rowCounter) + '/2002'
+
         tweet = row.split(',')[2] # isolate the tweet
         tweetWords = tweet.split(' ')
 
+        markovJSONfile = open('markov.json', 'r+')
+
         previousWord = ''
         for tweetWord in tweetWords:
-            if previousWord is not '':
-                if not markovData.get(previousWord): # key isn't there
-                    markovData[0][previousWord] = [] # init
-                    markovData[0][previousWord][tweetWord] = str(0) # start frequency at 0
 
-                elif not markovData.get(tweetWord): # value isn't there
-                    markovData[0][previousWord][tweetWord] = str(0) # start at 0
+            if previousWord is not '':
+                previousWord = sanitize(previousWord)
+                tweetWord = sanitize(tweetWord)
+
+                if not markovData[data].get(previousWord): # key isn't there
+                    markovData[data][previousWord] = {} # init
+                    markovData[data][previousWord][tweetWord] = str(0) # start frequency at 0
+
+                elif not markovData[data].get(tweetWord): # value isn't there
+                    markovData[data][previousWord][tweetWord] = str(0) # start at 0
 
                 else: # increment
-                    index = markovData[0][previousWord][tweetWord]
-                    index = int(index) + 1
-                    markovData[0][previousWord][tweetWord] = str(index)
+
+                    # TODO: fix!
+                    try:
+                        index = markovData[data][previousWord][tweetWord]
+                        index = int(index) + 1
+                        markovData[data][previousWord][tweetWord] = str(index)
+                    except KeyError:
+                        pass
+
+                # clear file
+                # markovJSONfile.seek(0)
+                # markovJSONfile.truncate()
+
+                # write to file
+                # json.dump(markovData, markovJSONfile, sort_keys=True, indent=4)
 
             previousWord = tweetWord
 
+        rowCounter = rowCounter + 1
 
-    markovJSONfile = open('markov.json', 'r+')
-    markovJSONfile = json.dump(markovData)
+    json.dump(markovData, markovJSONfile, sort_keys=True, indent=4)
     markovJSONfile.close()
 
     jadentweets_file.close()

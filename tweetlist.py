@@ -18,10 +18,10 @@ CONSUMER_SECRET = secrets["twitter"]["consumer_secret"]
 ACCESS_KEY = secrets["twitter"]["access_key"]
 ACCESS_SECRET = secrets["twitter"]["access_secret"]
 
-screen_name = secrets["jaden"]["handle"]
+jaden_name = secrets["jaden"]["handle"]
 
 
-def get_all_tweets():
+def getAllTweets(screen_name):
     # Twitter only allows access to a users most recent 3240 tweets with this method
 
     # authorize twitter, initialize tweepy
@@ -66,6 +66,10 @@ def get_all_tweets():
         writer.writerows(outtweets)
 
     pass
+
+def getJadenTweets():
+    getAllTweets(jaden_name)
+    return
 
 def isRetweet(row):
     # TODO: check if 'RT @' are the first letters of the tweet
@@ -157,7 +161,7 @@ def makeMarkovChain():
 
 
 
-def clean():
+def cleanTweets():
     editedfile = 'editedjadentweets.csv'
 
     try: # remove file if it exists

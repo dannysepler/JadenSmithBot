@@ -116,7 +116,17 @@ from beak import tweet
 
 # getAllTweets('loganfreedman')
 # cleanTweets()
-makeMarkovChain()
+# makeMarkovChain()
+
+print 'start'
+
+sentence = thinkOfASentence()
+
+print 'sentence is ' + sentence
+
+tweet('LOGAN TWEET: ' + sentence)
+
+print 'finish'
 
 # print 'starting\n'
 

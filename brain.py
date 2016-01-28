@@ -23,7 +23,7 @@ twython = Twython(app_key=CONSUMER_KEY,
 # data analysis
 
 def thinkOfASentence():
-    markov_file = open('markov.json', 'r')
+    markov_file = open('loganMarkov.json', 'r')
     markov = json.load(markov_file)
 
     print 'Choosing First Word'

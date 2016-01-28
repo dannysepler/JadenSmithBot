@@ -114,13 +114,15 @@ from beak import tweet
 #
 # - danny
 
+# getAllTweets('loganfreedman')
+# cleanTweets()
+makeMarkovChain()
 
+# print 'starting\n'
 
-print 'starting\n'
+# while True:
+#    sentence = thinkOfASentence() # make wisdom
+#    tweet(sentence) # tweet it
+#    time.sleep(600) # sleep for ten minutes
 
-while True:
-    sentence = thinkOfASentence() # make wisdom
-    tweet(sentence) # tweet it
-    time.sleep(600) # sleep for ten minutes
-
-print 'loop ended. shouldn\'t happen.\n'
+# print 'loop ended. shouldn\'t happen.\n'

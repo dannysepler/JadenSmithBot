@@ -100,7 +100,7 @@ def makeMarkovChain():
 
     print 'making markov chain'
 
-    jadentweets_file = open('officialjaden_tweets.csv', 'r')
+    jadentweets_file = open('loganfreedman_tweets.csv', 'r')
     # markovJSON = json.loads(request.POST.get('mydata', '{}'))
 
     data = 'data'
@@ -114,7 +114,7 @@ def makeMarkovChain():
         tweet = row.split(',')[2] # isolate the tweet
         tweetWords = tweet.split(' ')
 
-        markovJSONfile = open('markov.json', 'r+')
+        markovJSONfile = open('loganMarkov.json', 'wb')
 
         previousWord = ''
         for tweetWord in tweetWords:
@@ -162,7 +162,8 @@ def makeMarkovChain():
 
 
 def cleanTweets():
-    editedfile = 'editedjadentweets.csv'
+    # editedfile = 'editedjadentweets.csv'
+    editedfile = 'editedlogantweets.csv'
 
     try: # remove file if it exists
         os.remove(editedfile)
@@ -171,10 +172,12 @@ def cleanTweets():
         pass
 
 
-    jadentweets_file = open('officialjaden_tweets.csv', 'r')
+    # jadentweets_file = open('officialjaden_tweets.csv', 'r')
+    logantweets_file = open('loganfreedman_tweets.csv', 'r')
+
     output = open(editedfile, 'wb')
 
-    for row in jadentweets_file:
+    for row in logantweets_file:
 
         if isLineBreak(row):
             # don't write this to new file
@@ -186,10 +189,10 @@ def cleanTweets():
             output.write(row)
 
     output.close()
-    jadentweets_file.close()
+    logantweets_file.close()
 
     # remove old file
-    official_file = 'officialjaden_tweets.csv'
+    official_file = 'loganfreedman_tweets.csv'
     os.remove(official_file)
     os.rename(editedfile, official_file)
 

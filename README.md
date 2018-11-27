@@ -7,7 +7,7 @@ A TwitterBot that knows the truth that The Man is keeping from you.
 3. Running this file from your computer won't work without a file 
     called "secrets.json", which has some of the important Twitter keys. 
     I didn't put it on GitHub, to protect the security of this app.
-    Contact Danny at dsepler@ufl.edu or through Facebook for this file.
+    Contact Danny at dannysepler@gmail.com or through Facebook for this file.
 4. This app relies on "Tweepy" and "Twython" in order to function correctly.
     To install them, use `pip install tweepy` and `pip install twython` on your command line.
     If you don't have pip on your computer, Google it and download it.
